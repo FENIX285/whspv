@@ -1,0 +1,33 @@
+<<<<
+  const handleEnded = () => {
+    setIsPlaying(false);
+    cancelAnimationFrame(animationRef.current);
+    if (canvasRef.current) {
+      const ctx = canvasRef.current.getContext('2d');
+      if (ctx) ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+    }
+  };
+====
+  const handleEnded = () => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+    cancelAnimationFrame(animationRef.current);
+    if (canvasRef.current) {
+      const ctx = canvasRef.current.getContext('2d');
+      if (ctx) ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+    }
+  };
+>>>>
+<<<<
+        {!isPreview && (
+          <div className="text-[10px] opacity-70 mt-0.5 font-mono text-center">
+            {formatAudioTime(currentTime)} / {formatAudioTime(duration)}
+          </div>
+        )}
+====
+        {!isPreview && (
+          <div className="text-[10px] opacity-70 mt-0.5 font-mono text-center">
+            {isPlaying || currentTime > 0 ? formatAudioTime(currentTime) : formatAudioTime(duration)}
+          </div>
+        )}
+>>>>

@@ -1,0 +1,5 @@
+<<<<
+            style={{ top: contextMenuPos.y, left: contextMenuPos.x }}
+====
+            style={{ top: Math.min(contextMenuPos.y, window.innerHeight - 100), left: Math.min(contextMenuPos.x, window.innerWidth - 160) }}
+>>>>

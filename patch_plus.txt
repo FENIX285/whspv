@@ -1,0 +1,91 @@
+<<<<
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera, Video, Smile, Reply, Copy } from 'lucide-react';
+====
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera, Video, Smile, Reply, Copy, Plus } from 'lucide-react';
+>>>>
+<<<<
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+====
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+  const [showAttachmentMenu, setShowAttachmentMenu] = useState(false);
+  const attachmentMenuRef = useRef<HTMLDivElement>(null);
+>>>>
+<<<<
+    const handleGlobalClick = (e: MouseEvent) => {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(e.target as Node)) {
+        setShowEmojiPicker(false);
+      }
+    };
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+====
+    const handleGlobalClick = (e: MouseEvent) => {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(e.target as Node)) {
+        setShowEmojiPicker(false);
+      }
+      if (attachmentMenuRef.current && !attachmentMenuRef.current.contains(e.target as Node)) {
+        setShowAttachmentMenu(false);
+      }
+    };
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+>>>>
+<<<<
+        <form onSubmit={handleSendText} className="flex items-center gap-2 sm:gap-4">
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2" title="Adjuntar archivo">
+            <Paperclip className="w-5 h-5" />
+            <input type="file" accept="image/*,video/*,audio/*,application/*,text/*" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2 -ml-2 sm:hidden" title="Tomar foto">
+            <Camera className="w-5 h-5" />
+            <input type="file" accept="image/*" capture="environment" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2 -ml-2 sm:hidden" title="Grabar video">
+            <Video className="w-5 h-5" />
+            <input type="file" accept="video/*" capture="environment" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+====
+        <form onSubmit={handleSendText} className="flex items-center gap-1 sm:gap-4">
+          {/* Desktop Attachment Button */}
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2 hidden sm:block" title="Adjuntar archivo">
+            <Paperclip className="w-5 h-5" />
+            <input type="file" accept="image/*,video/*,audio/*,application/*,text/*" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+
+          {/* Mobile Attachment Menu */}
+          <div className="relative sm:hidden" ref={attachmentMenuRef}>
+            <button
+              type="button"
+              className="text-slate-400 hover:text-emerald-400 transition-colors p-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowAttachmentMenu(!showAttachmentMenu);
+              }}
+              disabled={!contact.mutual || !contact.online}
+            >
+              <Plus className="w-6 h-6" />
+            </button>
+            
+            {showAttachmentMenu && (
+              <div className="absolute bottom-12 left-0 bg-[#16191F] border border-slate-700 rounded-2xl shadow-xl p-2 flex flex-col gap-1 z-50 mb-2 w-48 animate-in fade-in zoom-in-95 duration-200">
+                <label className="flex items-center gap-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 transition-colors cursor-pointer p-3 rounded-xl" onClick={() => setShowAttachmentMenu(false)}>
+                  <Paperclip className="w-5 h-5" />
+                  <span className="text-sm font-medium">Archivo</span>
+                  <input type="file" accept="image/*,video/*,audio/*,application/*,text/*" className="hidden" onChange={handleFileUpload} />
+                </label>
+                <label className="flex items-center gap-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 transition-colors cursor-pointer p-3 rounded-xl" onClick={() => setShowAttachmentMenu(false)}>
+                  <Camera className="w-5 h-5" />
+                  <span className="text-sm font-medium">Foto</span>
+                  <input type="file" accept="image/*" capture="environment" className="hidden" onChange={handleFileUpload} />
+                </label>
+                <label className="flex items-center gap-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 transition-colors cursor-pointer p-3 rounded-xl" onClick={() => setShowAttachmentMenu(false)}>
+                  <Video className="w-5 h-5" />
+                  <span className="text-sm font-medium">Video</span>
+                  <input type="file" accept="video/*" capture="environment" className="hidden" onChange={handleFileUpload} />
+                </label>
+              </div>
+            )}
+          </div>
+>>>>

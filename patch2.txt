@@ -1,0 +1,37 @@
+<<<<
+        {isRemoteTyping && (
+          <div className="flex justify-start">
+====
+        {contextMenuMsgId && (
+          <div 
+            className="fixed z-50 bg-[#16191F] border border-slate-700 rounded-lg shadow-2xl py-1 flex flex-col min-w-[150px]"
+            style={{ top: contextMenuPos.y, left: contextMenuPos.x }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="px-4 py-2 text-sm text-left text-slate-300 hover:bg-slate-800 transition-colors flex items-center gap-2"
+              onClick={async () => {
+                await db.messages.delete(contextMenuMsgId);
+                setContextMenuMsgId(null);
+              }}
+            >
+              <Trash2 className="w-4 h-4 text-red-400" />
+              <span>Delete for me</span>
+            </button>
+            <button 
+              className="px-4 py-2 text-sm text-left text-slate-300 hover:bg-slate-800 transition-colors flex items-center gap-2"
+              onClick={async () => {
+                await db.messages.delete(contextMenuMsgId);
+                rtcManager.sendDeleteMessage(contact.contactId, contextMenuMsgId);
+                setContextMenuMsgId(null);
+              }}
+            >
+              <Trash2 className="w-4 h-4 text-red-500" />
+              <span className="text-red-400">Delete for all</span>
+            </button>
+          </div>
+        )}
+        
+        {isRemoteTyping && (
+          <div className="flex justify-start">
+>>>>

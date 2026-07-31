@@ -1,0 +1,56 @@
+<<<<
+  const { userId, logout } = useUser();
+====
+  const { userId, logout, aesKey } = useUser();
+>>>>
+<<<<
+  const unreadCounts = useLiveQuery(
+    async () => {
+      const msgs = await db.messages.toArray();
+      const counts: Record<string, number> = {};
+      for (const m of msgs) {
+        if (m.senderId === m.chatId && m.status !== 'read') {
+          counts[m.chatId] = (counts[m.chatId] || 0) + 1;
+        }
+      }
+      return counts;
+    },
+    []
+  ) || {};
+====
+  const chatData = useLiveQuery(
+    async () => {
+      const msgs = await db.messages.orderBy('timestamp').toArray();
+      const counts: Record<string, number> = {};
+      const lasts: Record<string, { message: LocalMessage, plainText: string }> = {};
+
+      for (const m of msgs) {
+        if (m.senderId === m.chatId && m.status !== 'read') {
+          counts[m.chatId] = (counts[m.chatId] || 0) + 1;
+        }
+        
+        // Always store the last one since we ordered by timestamp
+        lasts[m.chatId] = { message: m, plainText: '' };
+      }
+      
+      // Decrypt the last messages
+      if (aesKey) {
+        for (const chatId in lasts) {
+          try {
+            const m = lasts[chatId].message;
+            if (m.type === 'text' && m.content) {
+              lasts[chatId].plainText = await decryptText(m.content, aesKey);
+            }
+          } catch (e) {
+            console.error("Failed to decrypt last message", e);
+          }
+        }
+      }
+
+      return { unreadCounts: counts, lastMessages: lasts };
+    },
+    [aesKey]
+  ) || { unreadCounts: {}, lastMessages: {} };
+  
+  const { unreadCounts, lastMessages } = chatData;
+>>>>

@@ -1,0 +1,13 @@
+<<<<
+        {!isPreview && (
+          <div className="text-[10px] opacity-70 mt-0.5 font-mono text-center">
+            {formatAudioTime(currentTime)} / {formatAudioTime(duration)}
+          </div>
+        )}
+====
+        {!isPreview && (
+          <div className="text-[10px] opacity-70 mt-0.5 font-mono text-center">
+            {isPlaying || currentTime > 0 ? formatAudioTime(currentTime) : formatAudioTime(duration)}
+          </div>
+        )}
+>>>>

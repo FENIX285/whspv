@@ -1,0 +1,34 @@
+<<<<
+            <div key={msg.id} className={`flex items-start gap-3 ${isMe ? 'flex-row-reverse' : ''}`}>
+              <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${isMe ? 'bg-emerald-600 text-black' : 'bg-slate-700 text-slate-300'}`}>
+                {isMe ? 'ME' : contact.alias.charAt(0).toUpperCase()}
+              </div>
+              <div className="max-w-[75%] sm:max-w-sm min-w-0">
+                <div className={`p-4 shadow-xl ${isMe ? 'bg-emerald-600/20 border border-emerald-500/30 rounded-2xl rounded-tr-none' : 'bg-slate-800 rounded-2xl rounded-tl-none'}`}>
+====
+            <div 
+              key={msg.id} 
+              className={`flex items-start gap-3 ${isMe ? 'flex-row-reverse' : ''}`}
+            >
+              <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${isMe ? 'bg-emerald-600 text-black' : 'bg-slate-700 text-slate-300'}`}>
+                {isMe ? 'ME' : contact.alias.charAt(0).toUpperCase()}
+              </div>
+              <div className="max-w-[75%] sm:max-w-sm min-w-0 relative">
+                <div 
+                  className={`p-4 shadow-xl cursor-pointer select-none ${isMe ? 'bg-emerald-600/20 border border-emerald-500/30 rounded-2xl rounded-tr-none' : 'bg-slate-800 rounded-2xl rounded-tl-none'}`}
+                  onContextMenu={(e) => {
+                    e.preventDefault();
+                    setContextMenuMsgId(msg.id);
+                    setContextMenuPos({ x: e.clientX, y: e.clientY });
+                  }}
+                  onTouchStart={(e) => {
+                    const touch = e.touches[0];
+                    window.__touchTimeout = setTimeout(() => {
+                      setContextMenuMsgId(msg.id);
+                      setContextMenuPos({ x: touch.clientX, y: touch.clientY });
+                    }, 500);
+                  }}
+                  onTouchEnd={() => clearTimeout(window.__touchTimeout)}
+                  onTouchMove={() => clearTimeout(window.__touchTimeout)}
+                >
+>>>>

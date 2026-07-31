@@ -1,0 +1,48 @@
+<<<<
+          return (
+            <div key={msg.id} className={`flex items-start gap-3 ${isMe ? 'flex-row-reverse' : ''}`}>
+              <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${isMe ? 'bg-emerald-600 text-black' : 'bg-slate-700 text-slate-300'}`}>
+                {isMe ? 'ME' : contact.alias.charAt(0).toUpperCase()}
+              </div>
+              <div className="max-w-[75%] sm:max-w-sm min-w-0 relative">
+                <div 
+                  className={`p-4 shadow-xl cursor-pointer select-none ${isMe ? 'bg-emerald-600/20 border border-emerald-500/30 rounded-2xl rounded-tr-none' : 'bg-slate-800 rounded-2xl rounded-tl-none'}`}
+====
+          return (
+            <div key={msg.id} id={`msg-${msg.id}`} className={`flex items-start gap-3 ${isMe ? 'flex-row-reverse' : ''}`}>
+              <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${isMe ? 'bg-emerald-600 text-black' : 'bg-slate-700 text-slate-300'}`}>
+                {isMe ? 'ME' : contact.alias.charAt(0).toUpperCase()}
+              </div>
+              <div className="max-w-[75%] sm:max-w-sm min-w-0 relative">
+                <div 
+                  id={`msg-bubble-${msg.id}`}
+                  className={`p-4 shadow-xl cursor-pointer select-none transition-colors duration-500 ${isMe ? 'bg-emerald-600/20 border border-emerald-500/30 rounded-2xl rounded-tr-none' : 'bg-slate-800 rounded-2xl rounded-tl-none'}`}
+>>>>
+<<<<
+                  {msg.replyTo && (() => {
+                    const originalMsg = decryptedMessages.find(m => m.id === msg.replyTo);
+                    if (!originalMsg) return null;
+                    return (
+                      <div className="mb-2 bg-black/20 border border-slate-700/30 rounded-lg p-2 flex items-start justify-between relative overflow-hidden text-xs">
+====
+                  {msg.replyTo && (() => {
+                    const originalMsg = decryptedMessages.find(m => m.id === msg.replyTo);
+                    if (!originalMsg) return null;
+                    return (
+                      <div 
+                        className="mb-2 bg-black/20 hover:bg-black/40 transition-colors cursor-pointer border border-slate-700/30 rounded-lg p-2 flex items-start justify-between relative overflow-hidden text-xs"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const el = document.getElementById(`msg-${msg.replyTo}`);
+                          const bubble = document.getElementById(`msg-bubble-${msg.replyTo}`);
+                          if (el && bubble) {
+                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            const originalBg = bubble.style.backgroundColor;
+                            bubble.style.backgroundColor = 'rgba(52, 211, 153, 0.4)'; // emerald-400
+                            setTimeout(() => {
+                              bubble.style.backgroundColor = originalBg;
+                            }, 1000);
+                          }
+                        }}
+                      >
+>>>>

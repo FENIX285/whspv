@@ -1,0 +1,65 @@
+<<<<
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera } from 'lucide-react';
+
+export default function ChatView({ contact, onOpenMenu }: { contact: Contact, onOpenMenu?: () => void }) {
+====
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera, Smile } from 'lucide-react';
+import EmojiPicker, { Theme, EmojiStyle } from 'emoji-picker-react';
+
+export default function ChatView({ contact, onOpenMenu }: { contact: Contact, onOpenMenu?: () => void }) {
+>>>>
+<<<<
+  const [inputText, setInputText] = useState('');
+  const [isRemoteTyping, setIsRemoteTyping] = useState(false);
+====
+  const [inputText, setInputText] = useState('');
+  const [isRemoteTyping, setIsRemoteTyping] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+>>>>
+<<<<
+  useEffect(() => {
+    const handleGlobalClick = () => setContextMenuMsgId(null);
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+  }, []);
+====
+  useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      setContextMenuMsgId(null);
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(e.target as Node)) {
+        setShowEmojiPicker(false);
+      }
+    };
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+  }, []);
+>>>>
+<<<<
+          <div className="flex-1 bg-[#16191F] border border-slate-700 rounded-xl px-4 py-3 flex items-center">
+            <input
+====
+          <div className="flex-1 bg-[#16191F] border border-slate-700 rounded-xl px-2 sm:px-4 py-2 sm:py-3 flex items-center relative" ref={emojiPickerRef}>
+            <button 
+              type="button"
+              className="text-slate-400 hover:text-emerald-400 transition-colors p-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowEmojiPicker(!showEmojiPicker);
+              }}
+            >
+              <Smile className="w-5 h-5" />
+            </button>
+            {showEmojiPicker && (
+              <div className="absolute bottom-full right-0 sm:left-0 mb-2 z-50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+                <EmojiPicker 
+                  theme={Theme.DARK}
+                  emojiStyle={EmojiStyle.NATIVE}
+                  onEmojiClick={(emojiData) => {
+                    setInputText(prev => prev + emojiData.emoji);
+                  }}
+                />
+              </div>
+            )}
+            <input
+>>>>

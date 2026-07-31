@@ -1,0 +1,13 @@
+<<<<
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera, Smile } from 'lucide-react';
+====
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera, Smile, Reply } from 'lucide-react';
+>>>>
+<<<<
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+====
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+  const [replyingTo, setReplyingTo] = useState<(LocalMessage & { plainContent: string, meta?: any }) | null>(null);
+>>>>

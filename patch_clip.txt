@@ -1,0 +1,11 @@
+<<<<
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2">
+            <Paperclip className="w-5 h-5" />
+            <input type="file" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+====
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2" title="Adjuntar archivo">
+            <Paperclip className="w-5 h-5" />
+            <input type="file" accept="image/*,video/*,audio/*,application/*,text/*" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+>>>>

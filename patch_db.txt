@@ -1,0 +1,12 @@
+<<<<
+  expiresAt?: number; // Optional timestamp when it should be deleted
+  fileId?: string; // Reference to files table
+  status?: 'sent' | 'delivered' | 'read';
+}
+====
+  expiresAt?: number; // Optional timestamp when it should be deleted
+  fileId?: string; // Reference to files table
+  status?: 'sent' | 'delivered' | 'read';
+  replyTo?: string; // ID of the message being replied to
+}
+>>>>

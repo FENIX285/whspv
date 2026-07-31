@@ -1,0 +1,38 @@
+<<<<
+                  <div className="flex justify-between items-center mt-1">
+                    <p className={`text-xs truncate ${isActive ? 'text-slate-400' : 'text-emerald-500'}`}>
+                      {!contact.mutual ? "Awaiting mutual" : contact.online ? "Active" : "Offline"}
+                    </p>
+                    {unreadCounts[contact.contactId] > 0 && !isActive && (
+                      <span className="bg-emerald-500 text-[#0F1115] text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+                        {unreadCounts[contact.contactId]}
+                      </span>
+                    )}
+                  </div>
+====
+                  <div className="flex justify-between items-center mt-1">
+                    <p className={`text-xs truncate pr-2 ${isActive ? 'text-slate-400' : (unreadCounts[contact.contactId] > 0 ? 'text-emerald-500' : 'text-slate-500')}`}>
+                      {(() => {
+                        const lastMsgData = lastMessages[contact.contactId];
+                        const lastMsg = lastMsgData?.message;
+                        if (lastMsg) {
+                          if (lastMsg.type === 'text') return lastMsgData.plainText || 'Text message';
+                          if (lastMsg.type === 'image') return '📷 Image';
+                          if (lastMsg.type === 'audio') return '🎤 Voice message';
+                          if (lastMsg.type === 'video') return '🎥 Video';
+                          if (lastMsg.type === 'file') return '📄 File';
+                        }
+                        return 'No messages';
+                      })()}
+                    </p>
+                    {unreadCounts[contact.contactId] > 0 && !isActive ? (
+                      <span className="bg-emerald-500 text-[#0F1115] text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center shrink-0">
+                        {unreadCounts[contact.contactId]}
+                      </span>
+                    ) : lastMessages[contact.contactId]?.message ? (
+                      <span className="text-[10px] text-slate-500 font-medium shrink-0">
+                        {new Date(lastMessages[contact.contactId].message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    ) : null}
+                  </div>
+>>>>

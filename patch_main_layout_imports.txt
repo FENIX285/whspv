@@ -1,0 +1,10 @@
+<<<<
+import { rtcManager } from '../webrtc';
+import { Contact } from '../types';
+import { db, LocalMessage } from '../db';
+====
+import { rtcManager } from '../webrtc';
+import { Contact } from '../types';
+import { db, LocalMessage } from '../db';
+import { decryptText } from '../crypto';
+>>>>

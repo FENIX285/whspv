@@ -1,0 +1,20 @@
+<<<<
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera, Smile, Reply, Copy } from 'lucide-react';
+====
+import { Send, Paperclip, Mic, Clock, Trash2, X, Download, Menu, Check, CheckCheck, Play, Square, Phone, PhoneCall, PhoneOff, MicOff, Camera, Video, Smile, Reply, Copy } from 'lucide-react';
+>>>>
+<<<<
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2 -ml-2 sm:hidden">
+            <Camera className="w-5 h-5" />
+            <input type="file" accept="image/*,video/*" capture="environment" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+====
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2 -ml-2 sm:hidden" title="Tomar foto">
+            <Camera className="w-5 h-5" />
+            <input type="file" accept="image/*" capture="environment" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+          <label className="text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer p-2 -ml-2 sm:hidden" title="Grabar video">
+            <Video className="w-5 h-5" />
+            <input type="file" accept="video/*" capture="environment" className="hidden" onChange={handleFileUpload} disabled={!contact.mutual || !contact.online} />
+          </label>
+>>>>
