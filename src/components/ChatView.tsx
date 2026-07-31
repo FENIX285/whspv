@@ -1448,7 +1448,13 @@ function AudioRecorder({ contact, replyingToId, onSendAudio }: { contact: Contac
     setPreviewBuffer(null);
     
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          autoGainControl: true,
+          echoCancellation: true,
+          noiseSuppression: true,
+        },
+      });
       const mr = new MediaRecorder(stream);
       mediaRecorderRef.current = mr;
       chunksRef.current = [];
@@ -1634,8 +1640,20 @@ function AudioPlayer({ buffer, mimeType, isMe, isPreview }: { buffer: ArrayBuffe
       analyser.fftSize = 64;
       analyserRef.current = analyser;
       
+      const gainNode = ctx.createGain();
+      gainNode.gain.value = 1.8; // Amplifies voice message playback volume by 80%
+
+      const compressor = ctx.createDynamicsCompressor();
+      compressor.threshold.value = -24;
+      compressor.knee.value = 30;
+      compressor.ratio.value = 12;
+      compressor.attack.value = 0.003;
+      compressor.release.value = 0.25;
+      
       const source = ctx.createMediaElementSource(audioRef.current);
-      source.connect(analyser);
+      source.connect(gainNode);
+      gainNode.connect(compressor);
+      compressor.connect(analyser);
       analyser.connect(ctx.destination);
     } catch (e) {
       console.error("Web Audio API setup failed", e);
